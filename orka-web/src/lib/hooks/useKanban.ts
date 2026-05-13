@@ -78,7 +78,7 @@ export function useKanbanData() {
 
     const { error } = await supabase
       .from('campaigns')
-      .update({ column_id: columnId, column_order: order })
+      .update({ column_id: columnId, column_order: order } as any)
       .eq('id', campaignId)
 
     if (error) {
@@ -93,7 +93,7 @@ export function useKanbanData() {
   }
 
   const updateColumn = async (id: string, updates: Partial<KanbanColumn>) => {
-    const { error } = await supabase.from('kanban_columns').update(updates).eq('id', id)
+    const { error } = await supabase.from('kanban_columns').update(updates as any).eq('id', id)
     if (error) console.error('Error updating column:', error)
   }
 

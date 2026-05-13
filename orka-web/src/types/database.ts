@@ -100,8 +100,22 @@ export interface Database {
           ordem: number
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['campaign_checklists']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['campaign_checklists']['Insert']>
+        Insert: {
+          id?: string
+          campaign_id: string
+          texto: string
+          is_completed?: boolean
+          ordem?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          campaign_id?: string
+          texto?: string
+          is_completed?: boolean
+          ordem?: number
+          created_at?: string
+        }
       }
       campaign_comments: {
         Row: {
@@ -111,8 +125,20 @@ export interface Database {
           autor_nome: string
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['campaign_comments']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['campaign_comments']['Insert']>
+        Insert: {
+          id?: string
+          campaign_id: string
+          texto: string
+          autor_nome?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          campaign_id?: string
+          texto?: string
+          autor_nome?: string
+          created_at?: string
+        }
       }
       campaign_labels: {
         Row: {
@@ -122,8 +148,20 @@ export interface Database {
           cor: string
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['campaign_labels']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['campaign_labels']['Insert']>
+        Insert: {
+          id?: string
+          campaign_id: string
+          texto: string
+          cor?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          campaign_id?: string
+          texto?: string
+          cor?: string
+          created_at?: string
+        }
       }
       campaign_attachments: {
         Row: {
@@ -134,8 +172,22 @@ export interface Database {
           file_type: string | null
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['campaign_attachments']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['campaign_attachments']['Insert']>
+        Insert: {
+          id?: string
+          campaign_id: string
+          file_url: string
+          file_name: string
+          file_type?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          campaign_id?: string
+          file_url?: string
+          file_name?: string
+          file_type?: string | null
+          created_at?: string
+        }
       }
     }
   }

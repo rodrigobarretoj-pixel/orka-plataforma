@@ -72,7 +72,7 @@ export function useCampaignDetails(campaignId: string) {
   }
 
   const toggleChecklistItem = async (id: string, is_completed: boolean) => {
-    const { error } = await supabase.from('campaign_checklists').update({ is_completed }).eq('id', id)
+    const { error } = await supabase.from('campaign_checklists').update({ is_completed } as any).eq('id', id)
     if (error) console.error('Error toggling checklist item:', error)
   }
 
