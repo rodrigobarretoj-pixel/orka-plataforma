@@ -88,7 +88,7 @@ export function useKanbanData() {
   }
   const addColumn = async (nome: string, cor: string) => {
     const newOrder = columns.length > 0 ? columns[columns.length - 1].ordem + 1 : 1
-    const { error } = await supabase.from('kanban_columns').insert({ nome, cor, ordem: newOrder })
+    const { error } = await supabase.from('kanban_columns').insert({ nome, cor, ordem: newOrder } as any)
     if (error) console.error('Error adding column:', error)
   }
 
