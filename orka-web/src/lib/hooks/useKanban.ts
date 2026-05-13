@@ -78,7 +78,7 @@ export function useKanbanData() {
 
     const { error } = await supabase
       .from('campaigns')
-      .update({ column_id: columnId, column_order: order } as any)
+      .update({ column_id: columnId, column_order: order })
       .eq('id', campaignId)
 
     if (error) {
@@ -88,12 +88,12 @@ export function useKanbanData() {
   }
   const addColumn = async (nome: string, cor: string) => {
     const newOrder = columns.length > 0 ? columns[columns.length - 1].ordem + 1 : 1
-    const { error } = await supabase.from('kanban_columns').insert({ nome, cor, ordem: newOrder } as any)
+    const { error } = await supabase.from('kanban_columns').insert({ nome, cor, ordem: newOrder })
     if (error) console.error('Error adding column:', error)
   }
 
   const updateColumn = async (id: string, updates: Partial<KanbanColumn>) => {
-    const { error } = await supabase.from('kanban_columns').update(updates as any).eq('id', id)
+    const { error } = await supabase.from('kanban_columns').update(updates).eq('id', id)
     if (error) console.error('Error updating column:', error)
   }
 

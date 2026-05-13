@@ -67,12 +67,12 @@ export function useCampaignDetails(campaignId: string) {
   // Checklists
   const addChecklistItem = async (texto: string) => {
     const newOrder = checklists.length > 0 ? checklists[checklists.length - 1].ordem + 1 : 1
-    const { error } = await supabase.from('campaign_checklists').insert({ campaign_id: campaignId, texto, is_completed: false, ordem: newOrder } as any)
+    const { error } = await supabase.from('campaign_checklists').insert({ campaign_id: campaignId, texto, is_completed: false, ordem: newOrder })
     if (error) console.error('Error adding checklist item:', error)
   }
 
   const toggleChecklistItem = async (id: string, is_completed: boolean) => {
-    const { error } = await supabase.from('campaign_checklists').update({ is_completed } as any).eq('id', id)
+    const { error } = await supabase.from('campaign_checklists').update({ is_completed }).eq('id', id)
     if (error) console.error('Error toggling checklist item:', error)
   }
 
@@ -83,7 +83,7 @@ export function useCampaignDetails(campaignId: string) {
 
   // Comments
   const addComment = async (texto: string, autor_nome: string = 'Você') => {
-    const { error } = await supabase.from('campaign_comments').insert({ campaign_id: campaignId, texto, autor_nome } as any)
+    const { error } = await supabase.from('campaign_comments').insert({ campaign_id: campaignId, texto, autor_nome })
     if (error) console.error('Error adding comment:', error)
   }
 
@@ -94,7 +94,7 @@ export function useCampaignDetails(campaignId: string) {
 
   // Labels
   const addLabel = async (texto: string, cor: string) => {
-    const { error } = await supabase.from('campaign_labels').insert({ campaign_id: campaignId, texto, cor } as any)
+    const { error } = await supabase.from('campaign_labels').insert({ campaign_id: campaignId, texto, cor })
     if (error) console.error('Error adding label:', error)
   }
 
