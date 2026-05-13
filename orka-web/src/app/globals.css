@@ -1,0 +1,845 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ====================================================
+   ORKA — Design System
+   Dark Mode · Glassmorphism · Premium UI
+   ==================================================== */
+
+:root {
+  /* Core Brand */
+  --orka-bg:           #09090f;
+  --orka-bg-2:         #0e0e1a;
+  --orka-bg-3:         #13131f;
+  --orka-surface:      #17172a;
+  --orka-surface-2:    #1e1e30;
+  --orka-border:       rgba(255,255,255,0.07);
+  --orka-border-hover: rgba(255,255,255,0.13);
+
+  /* Brand Colors */
+  --orka-primary:      #6366f1;   /* indigo */
+  --orka-primary-glow: rgba(99,102,241,0.3);
+  --orka-secondary:    #8b5cf6;   /* violet */
+  --orka-accent:       #06b6d4;   /* cyan */
+  --orka-success:      #10b981;   /* emerald */
+  --orka-warning:      #f59e0b;   /* amber */
+  --orka-danger:       #ef4444;   /* red */
+  --orka-neutral:      #6b7280;   /* gray */
+
+  /* Text */
+  --orka-text:         #f1f5f9;
+  --orka-text-2:       #94a3b8;
+  --orka-text-3:       #64748b;
+
+  /* Kanban Column Colors */
+  --col-entrada:    #6366f1;
+  --col-producao:   #8b5cf6;
+  --col-locucao:    #06b6d4;
+  --col-aprovacao:  --orka-warning;
+  --col-entregue:   #10b981;
+
+  /* Glassmorphism */
+  --glass-bg:      rgba(255,255,255,0.03);
+  --glass-border:  rgba(255,255,255,0.07);
+  --glass-blur:    blur(12px);
+
+  /* Sidebar */
+  --sidebar-w:     240px;
+  --header-h:      60px;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+
+  /* Transitions */
+  --trans-fast:   all 0.15s ease;
+  --trans-medium: all 0.25s ease;
+  --trans-slow:   all 0.4s ease;
+}
+
+/* ============================
+   Reset & Base
+   ============================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--orka-bg);
+  color: var(--orka-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+::selection {
+  background: var(--orka-primary);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--orka-surface-2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--orka-border-hover); }
+
+/* ============================
+   Layout
+   ============================ */
+.orka-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.orka-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-left: var(--sidebar-w);
+}
+
+.orka-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+}
+
+/* ============================
+   Sidebar
+   ============================ */
+.orka-sidebar {
+  width: var(--sidebar-w);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: var(--orka-bg-2);
+  border-right: 1px solid var(--orka-border);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.orka-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--orka-border);
+  flex-shrink: 0;
+}
+
+.orka-sidebar-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--orka-primary), var(--orka-secondary));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
+  color: white;
+  box-shadow: 0 0 20px var(--orka-primary-glow);
+  flex-shrink: 0;
+}
+
+.orka-sidebar-logo .logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #f1f5f9, var(--orka-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.orka-sidebar-logo .logo-version {
+  font-size: 10px;
+  color: var(--orka-text-3);
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.orka-sidebar-section {
+  padding: 16px 12px 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.orka-sidebar-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orka-text-3);
+  padding: 0 4px;
+  margin-bottom: 6px;
+}
+
+.orka-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  color: var(--orka-text-2);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--trans-fast);
+  text-decoration: none;
+  margin-bottom: 2px;
+  position: relative;
+}
+
+.orka-nav-item:hover {
+  background: var(--glass-bg);
+  color: var(--orka-text);
+}
+
+.orka-nav-item.active {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1));
+  color: var(--orka-primary);
+  border: 1px solid rgba(99,102,241,0.2);
+}
+
+.orka-nav-item .nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.orka-nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--orka-primary);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 20px;
+}
+
+.orka-sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--orka-border);
+  flex-shrink: 0;
+}
+
+/* ============================
+   Header
+   ============================ */
+.orka-header {
+  height: var(--header-h);
+  background: var(--orka-bg-2);
+  border-bottom: 1px solid var(--orka-border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.orka-header-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--orka-text);
+}
+
+.orka-header-subtitle {
+  font-size: 13px;
+  color: var(--orka-text-3);
+}
+
+/* ============================
+   Cards
+   ============================ */
+.orka-card {
+  background: var(--orka-surface);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: var(--trans-medium);
+}
+
+.orka-card:hover {
+  border-color: var(--orka-border-hover);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.orka-card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* ============================
+   Kanban Board
+   ============================ */
+.kanban-board {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  align-items: flex-start;
+}
+
+.kanban-column {
+  width: 300px;
+  min-width: 300px;
+  background: var(--orka-surface);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--header-h) - 80px);
+  flex-shrink: 0;
+}
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--orka-border);
+  flex-shrink: 0;
+}
+
+.kanban-column-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kanban-column-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orka-text);
+  flex: 1;
+}
+
+.kanban-column-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orka-text-3);
+  background: var(--orka-bg);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.kanban-cards {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 80px;
+}
+
+.kanban-card {
+  background: var(--orka-surface-2);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  cursor: grab;
+  transition: var(--trans-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.kanban-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px 0 0 2px;
+  opacity: 0;
+  transition: var(--trans-fast);
+}
+
+.kanban-card:hover {
+  border-color: var(--orka-border-hover);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transform: translateY(-1px);
+}
+
+.kanban-card:hover::before { opacity: 1; }
+.kanban-card:active { cursor: grabbing; }
+
+.kanban-card.priority-urgente::before { background: var(--orka-danger); }
+.kanban-card.priority-alta::before    { background: var(--orka-warning); }
+.kanban-card.priority-media::before   { background: var(--orka-accent); }
+.kanban-card.priority-baixa::before   { background: var(--orka-neutral); }
+
+.kanban-card.dragging {
+  opacity: 0.5;
+  transform: rotate(2deg) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+
+.kanban-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orka-text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.kanban-card-client {
+  font-size: 11px;
+  color: var(--orka-text-3);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.kanban-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 6px;
+}
+
+.kanban-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin: 8px 12px 12px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--orka-border);
+  background: transparent;
+  color: var(--orka-text-3);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--trans-fast);
+  width: calc(100% - 24px);
+  justify-content: center;
+}
+
+.kanban-add-btn:hover {
+  border-color: var(--orka-primary);
+  color: var(--orka-primary);
+  background: rgba(99,102,241,0.05);
+}
+
+/* ============================
+   Badges & Tags
+   ============================ */
+.orka-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.orka-badge-primary {
+  background: rgba(99,102,241,0.15);
+  color: var(--orka-primary);
+}
+
+.orka-badge-success {
+  background: rgba(16,185,129,0.15);
+  color: var(--orka-success);
+}
+
+.orka-badge-warning {
+  background: rgba(245,158,11,0.15);
+  color: var(--orka-warning);
+}
+
+.orka-badge-danger {
+  background: rgba(239,68,68,0.15);
+  color: var(--orka-danger);
+}
+
+.orka-badge-neutral {
+  background: rgba(107,114,128,0.15);
+  color: var(--orka-neutral);
+}
+
+.orka-badge-cyan {
+  background: rgba(6,182,212,0.15);
+  color: var(--orka-accent);
+}
+
+/* ============================
+   Buttons
+   ============================ */
+.orka-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--trans-fast);
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.orka-btn-primary {
+  background: linear-gradient(135deg, var(--orka-primary), var(--orka-secondary));
+  color: white;
+  box-shadow: 0 4px 14px var(--orka-primary-glow);
+}
+
+.orka-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--orka-primary-glow);
+}
+
+.orka-btn-ghost {
+  background: transparent;
+  color: var(--orka-text-2);
+  border: 1px solid var(--orka-border);
+}
+
+.orka-btn-ghost:hover {
+  background: var(--glass-bg);
+  color: var(--orka-text);
+  border-color: var(--orka-border-hover);
+}
+
+.orka-btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.orka-btn-icon {
+  padding: 7px;
+  border-radius: var(--radius-md);
+}
+
+/* ============================
+   Inputs
+   ============================ */
+.orka-input {
+  width: 100%;
+  background: var(--orka-bg-3);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-md);
+  padding: 9px 12px;
+  font-size: 13.5px;
+  color: var(--orka-text);
+  outline: none;
+  transition: var(--trans-fast);
+  font-family: 'Inter', sans-serif;
+}
+
+.orka-input:focus {
+  border-color: var(--orka-primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.orka-input::placeholder { color: var(--orka-text-3); }
+
+.orka-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--orka-text-2);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.orka-form-group {
+  margin-bottom: 16px;
+}
+
+/* ============================
+   Avatar
+   ============================ */
+.orka-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orka-primary), var(--orka-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.orka-avatar-sm {
+  width: 22px;
+  height: 22px;
+  font-size: 9px;
+}
+
+.orka-avatar-lg {
+  width: 36px;
+  height: 36px;
+  font-size: 13px;
+}
+
+/* ============================
+   Stat Cards
+   ============================ */
+.stat-card {
+  background: var(--orka-surface);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--trans-medium);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  opacity: 0.06;
+  transform: translate(20px, -20px);
+  transition: var(--trans-medium);
+}
+
+.stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.stat-card:hover::after { opacity: 0.12; }
+
+.stat-card.primary::after   { background: var(--orka-primary); }
+.stat-card.success::after   { background: var(--orka-success); }
+.stat-card.warning::after   { background: var(--orka-warning); }
+.stat-card.danger::after    { background: var(--orka-danger); }
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--orka-text-3);
+  font-weight: 500;
+}
+
+.stat-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================
+   Page Header
+   ============================ */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--orka-text);
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: var(--orka-text-3);
+  margin-top: 2px;
+}
+
+/* ============================
+   Empty State
+   ============================ */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty-state-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--orka-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.empty-state-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--orka-text-2);
+  margin-bottom: 6px;
+}
+
+.empty-state-text {
+  font-size: 13px;
+  color: var(--orka-text-3);
+  max-width: 280px;
+}
+
+/* ============================
+   Upload Zone
+   ============================ */
+.upload-zone {
+  border: 2px dashed var(--orka-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--trans-medium);
+  background: transparent;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--orka-primary);
+  background: rgba(99,102,241,0.04);
+}
+
+/* ============================
+   Divider
+   ============================ */
+.orka-divider {
+  height: 1px;
+  background: var(--orka-border);
+  margin: 20px 0;
+}
+
+/* ============================
+   Modal overlay
+   ============================ */
+.orka-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.orka-modal {
+  background: var(--orka-surface);
+  border: 1px solid var(--orka-border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================
+   Animations
+   ============================ */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--orka-primary-glow); }
+  50%       { box-shadow: 0 0 40px var(--orka-primary-glow), 0 0 60px rgba(139,92,246,0.2); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-spin       { animation: spin 0.8s linear infinite; }
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 0px; }
+  .orka-sidebar { transform: translateX(-100%); }
+  .orka-main { margin-left: 0; }
+  .orka-content { padding: 16px; }
+}
+
+/* ============================
+   Tailwind utilities override
+   ============================ */
+.text-primary   { color: var(--orka-primary) !important; }
+.text-success   { color: var(--orka-success) !important; }
+.text-warning   { color: var(--orka-warning) !important; }
+.text-danger    { color: var(--orka-danger) !important; }
+.text-accent    { color: var(--orka-accent) !important; }
+.text-muted     { color: var(--orka-text-3) !important; }
