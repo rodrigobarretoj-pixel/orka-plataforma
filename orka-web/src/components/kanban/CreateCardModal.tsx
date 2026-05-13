@@ -34,20 +34,21 @@ export default function CreateCardModal({ clients, locutores, columns, initialCo
     setLoading(true)
 
     try {
-      const { error } = await supabase.from('campaigns').insert({
+      const payload: import('@/types/database').Database['public']['Tables']['campaigns']['Insert'] = {
         titulo: formData.titulo,
         cliente_id: formData.cliente_id || null,
         locutor_id: formData.locutor_id || null,
         prazo: formData.prazo ? new Date(formData.prazo).toISOString() : null,
         prioridade: formData.prioridade as 'baixa' | 'media' | 'alta' | 'urgente',
         valor: formData.valor ? parseFloat(formData.valor) : null,
-        observacoes: formData.observacoes,
+        observacoes: formData.observacoes || null,
         column_id: formData.column_id || null,
         column_order: 0,
         status: 'ativo',
         ficha_url: null,
         ficha_parsed_json: null
-      })
+      }
+      const { error } = await supabase.from('campaigns').insert(payload as any)
 
       if (error) throw error
       onSuccess()
