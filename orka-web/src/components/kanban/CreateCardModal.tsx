@@ -43,7 +43,10 @@ export default function CreateCardModal({ clients, locutores, columns, initialCo
         valor: formData.valor ? parseFloat(formData.valor) : null,
         observacoes: formData.observacoes,
         column_id: formData.column_id || null,
-        status: 'ativo'
+        column_order: 0,
+        status: 'ativo',
+        ficha_url: null,
+        ficha_parsed_json: null
       })
 
       if (error) throw error
